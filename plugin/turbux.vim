@@ -187,6 +187,9 @@ endfunction
 
 function! s:find_test_name_in_quotes()
   let s:line_no = search('^\s*test\s*\([''"]\).*\1', 'bcnW')
+  if !s:line_no
+    let s:line_no = search('^\s*view_test\s*\([''"]\).*\1', 'bcnW')
+  endif
   if s:line_no
     let line = getline(s:line_no)
     let string = matchstr(line,'^\s*\w\+\s*\([''"]\)\zs.*\ze\1')
